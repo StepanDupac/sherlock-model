@@ -10,7 +10,7 @@ def load_idx(path):
         dims = struct.unpack('>' + 'I' * ndim, f.read(4 * ndim))
         data = np.frombuffer(f.read(), dtype=np.uint8)
         if data.size != np.prod(dims):
-            raise ValueError(f'{path}: expected {np.prod(dims)} bytes, got {date.size}')
+            raise ValueError(f'{path}: expected {np.prod(dims)} bytes, got {data.size}')
         return data.reshape(dims)
 
 def load_mnist(directory, val_size=5000, seed=42):
@@ -36,4 +36,5 @@ def ascii_art(img28, labels=' .:+*#%@'):
 if __name__ == '__main__':
     (X, y), _, _ = load_mnist('/Users/stepan/Academy/sherlock-model/dataset')
     print(X.shape, y.shape, X.min(), X.max())
-    print(f'label = {y[0]}'); print(ascii_art(X[0]))
+    print(f'label = {y[0]}')
+    print(ascii_art(X[0]))
